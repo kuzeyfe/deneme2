@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-
 
 void main() => runApp(MyApp());
-
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Web E-commerce',
+      title: 'E-Commerce App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -24,110 +21,67 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  List<String> _categories = ['Electronics', 'Clothes', 'Books'];
+  String _selectedCategory = 'Electronics';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Web E-commerce'),
+        title: Text('E-Commerce App'),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
-            color: Colors.orange,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          DropdownButton(
+            value: _selectedCategory,
+            items: _categories.map((String category) {
+              return DropdownMenuItem<String>(
+                value: category,
+                child: Text(category),
+              );
+            }).toList(),
+            onChanged: (String? value) {
+              setState(() {
+               _selectedCategory = value ?? 'default_value';
+              });
+            },
+          ),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              padding: EdgeInsets.all(16.0),
               children: <Widget>[
-                Image.asset(
-                  'images/logo.png',
-                  height: 60.0,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Ürün Ara',
-                          suffixIcon: Icon(Icons.search)),
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('GİRİŞ YAP'),
-                  //textColor: Colors.white,
-                )
+                ProductCard(imagePath: 'assets/images/product1.jpg', name: 'Product 1', price: 20.0),
+                ProductCard(imagePath: 'assets/images/product2.jpg', name: 'Product 2', price: 35.0),
+                ProductCard(imagePath: 'assets/images/product3.jpg', name: 'Product 3', price: 48.0),
+                ProductCard(imagePath: 'assets/images/product4.jpg', name: 'Product 4', price: 17.0),
               ],
             ),
           ),
-          Container(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Öne Çıkan Ürünler',
-                  style: TextStyle(fontSize: 24.0),
-                ),
-                SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        height: 300.0,
-                        margin: EdgeInsets.only(right: 30.0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.black,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                'images/2.png',
-                              ),
-                            )),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 300.0,
-                        margin: EdgeInsets.only(right: 30.0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.black,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                'images/4.png',
-                              ),
-                            )),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 300.0,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.black,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                'images/5.png',
-                              ),
-                            )),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final String imagePath;
+  final String name;
+  final double price;
+
+  ProductCard({required this.imagePath, required this.name, required this.price});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Image.asset(imagePath),
+          Text(name),
+          Text(price.toString() + '\$'),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Add to Cart'),
           ),
         ],
       ),
