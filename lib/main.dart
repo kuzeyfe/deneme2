@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'landing_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,21 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My App'),
-      ),
-      body: Center(
-        child: Text('Hello, world!'),
-      ),
+      home: LandingPage(),
     );
   }
 }

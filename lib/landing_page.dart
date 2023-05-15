@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import 'login_page.dart';
-import 'home_page.dart';
+import 'package:my_app/login_page.dart';
+import 'package:my_app/register_page.dart';
 
 class LandingPage extends StatelessWidget {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
-  return StreamBuilder<User?>(
-    stream: _auth.authStateChanges(),
-    builder: (_, AsyncSnapshot<User?> snapshot) {
-      if(snapshot.connectionState == ConnectionState.active) {
-          User? user = snapshot.data;
-          if(user == null){
-            return LoginPage();
-          } else{
-            return HomePage();
-          }
-        } else{
-          return CircularProgressIndicator();
-        }
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My App'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              child: Text('Giriş Yap'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('Kayıt Ol'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('Ürünleri Görüntüle'),
+              onPressed: () {
+                // Ürünleri görüntüleme sayfasına geçiş yap
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
