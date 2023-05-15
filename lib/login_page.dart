@@ -5,30 +5,38 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Giriş Yap'),
+        title: Text('Giriş'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'E-posta adresinizi girin',
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Şifrenizi girin',
-              ),
-            ),
-            RaisedButton(
-              child: Text('Giriş Yap'),
-              onPressed: () {
-                // Giriş yapma işlemleri
-              },
-            ),
-          ],
-        ),
+        child: Text("Giriş Sayfası"),
+      ),
+    );
+  }
+}
+
+class RegisterPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Kayıt'),
+      ),
+      body: Center(
+        child: Text("Kayıt Sayfası"),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Anasayfa'),
+      ),
+      body: Center(
+        child: Text("Ana Sayfa"),
       ),
     );
   }

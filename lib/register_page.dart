@@ -1,45 +1,34 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
+class SignupForm extends StatefulWidget {
+  @override
+  _SignupFormState createState() => _SignupFormState();
+}
+
+class _SignupFormState extends State<SignupForm> {
+  String username = '';
+  String email = '';
+  String password = '';
+
+  void handleSignup() {
+    // Burada signup işlevselliğini ekleyebilirsiniz
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Kayıt Ol'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Adınızı girin',
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Soyadınızı girin',
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'E-posta adresinizi girin',
-              ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Şifrenizi girin',
-              ),
-            ),
-            RaisedButton(
-              child: Text('Kayıt Ol'),
-              onPressed: () {
-                // Kayıt olma işlemleri
-              },
-            ),
-          ],
-        ),
-      ),
+    return Column(
+      children: [
+        Text('Kullanıcı Adı'),
+        TextField(onChanged: (newValue) => setState(() => username = newValue)),
+
+        Text('E-posta'),
+        TextField(onChanged: (newValue) => setState(() => email = newValue)),
+
+        Text('Şifre'),
+        TextField(onChanged: (newValue) => setState(() => password = newValue), obscureText: true),
+
+        ElevatedButton(child: Text('Kaydol'), onPressed: handleSignup)
+      ],
     );
   }
 }
